@@ -36,3 +36,23 @@ Asegúrate de tener instalado **Node.js** y **npm**.
 Puedes actualizar npm con:
 ```sh
 npm install npm@latest -g
+```
+
+Scripts Disponibles
+En el archivo package.json, encontrarás los siguientes scripts:
+```sh
+npm run dev
+```
+Inicia la aplicación en modo de desarrollo.
+```sh
+npm run build
+```
+Compila la aplicación para producción.
+```sh
+npm run lint
+```
+Ejecuta el linter para revisar el código.
+```sh
+npm run preview
+```
+Previsualiza la compilación de producción.
