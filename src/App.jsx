@@ -21,10 +21,41 @@ function App() {
     setCart( prev => [...prev, item])
     
   }
+
+  function removeFromCart(id) {
+    setCart( prev => prev.filter( item => item.id !== id ) )
+  }
+
+  function increaseQuantity(id) {
+    const item = cart.find( product => product.id === id )
+    item.quantity += 1
+    setCart( prev => [...prev])
+  }
+
+  function decreaseQuantity(id) {
+    const item = cart.find( product => product.id === id )
+    if (item.quantity === 1) {
+      removeFromCart(id)
+      return
+    }
+    item.quantity -= 1
+    setCart( prev => [...prev])
+  }
   
+  function clearCart() {
+    setCart([])
+  }
+
   return (
     <>
-      <Header />
+      <Header 
+        cart = {cart}
+        key={cart.id}
+        removeFromCart={removeFromCart}
+        increaseQuantity={increaseQuantity}
+        decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
+      />
       <main className='container-xl mt-5'>
         <h2 className='text-center'>Nuestra Colección</h2>
         
