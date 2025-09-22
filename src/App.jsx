@@ -8,8 +8,17 @@ import { db } from './data/db'
 
 function App() {
 
-  const [data, setData] = useState(db)
-  const [cart, setCart] = useState([])
+  const initialStateCart = ()=>{
+    const localStorageCart = localStorage.getItem('cart')
+    return localStorageCart ? JSON.parse(localStorageCart) : []
+  }
+
+  const [data] = useState(db)
+  const [cart, setCart] = useState(initialStateCart)
+
+  useEffect (() => {
+    localStorage.setItem('cart', JSON.stringify(cart))
+  },[cart])
 
   function addToCart(item) {
     if (cart.find( product => product.id === item.id )) {
@@ -20,6 +29,8 @@ function App() {
     item.quantity = 1
     setCart( prev => [...prev, item])
     
+
+    saveLocalStorage()
   }
 
   function removeFromCart(id) {
@@ -45,6 +56,8 @@ function App() {
   function clearCart() {
     setCart([])
   }
+
+
 
   return (
     <>
